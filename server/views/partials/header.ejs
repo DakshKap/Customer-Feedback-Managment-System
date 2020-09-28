@@ -1,0 +1,134 @@
+<!-- John Gomes -->
+<!-- Description: this is the partial view used at the beginning of each view -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CFMS</title>
+    <link rel="icon" type="image/png" href="public/img/favicon.png">
+    <!-- CSS section -->
+    <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="stylesheet" href="public/css/isotope.css">
+    <link rel='stylesheet' href='public/css/style.css'>
+    <link rel='stylesheet' href='public/css/font-awesome.css'>
+    <link rel='stylesheet' href='public/css/icon-component.css'>
+    <link rel='stylesheet' href='public/css/style.css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700">
+
+    <!-- Javascript Library -->
+    <script src="public/js/jquery.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+    <script src="public/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    <script src="public/js/jquery.easing.1.3.js"></script>
+    <script src="public/js/jquery.isotope.min.js"></script>
+    <script src="public/js/jquery.nicescroll.min.js"></script>
+    <script src="public/js/fancybox/jquery.fancybox.pack.js"></script>
+    <script src="public/js/skrollr.min.js"></script>
+    <script src="public/js/jquery.scrollTo.min.js"></script>
+    <script src="public/js/jquery.localScroll.min.js"></script>
+    <script src="public/js/stellar.js"></script>
+    <script src="public/js/jquery.appear.js"></script>
+    <!--<script src="public/js/jquery.flexslider-min.js"></script>-->
+
+    <!-- Template Main Javascript File -->
+
+    <script src="public/js/main.js"></script>
+</head>
+<body>
+<!--Navbar-->
+<section id="header" class="appear"></section>
+<div class="navbar fixed-top navbar-expand-lg">
+    <div class="container navBarCustom navbar-inner">
+        <!--Logo-->
+        <div class="navbar-header">
+            <div class="navbar-logo">
+                <a href="/"><img src="public/img/logo.png" alt="CCMS logo"></a>
+            </div>
+        </div>
+
+        <!--Menu-->
+        <ul class="navbar-nav navbar-right" id="nav">
+            <!--Navbar menu items visible based on displayed page-->
+            <%
+                if(data.msg=="home")
+                {%>
+                    <li class="nav-item active"><a class="nav-link" href="#header">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#section-about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#section-contact">Contact</a></li>
+                    <!--Login Dropdown (includes form)-->
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle nav-link " data-toggle="dropdown" href="">Log in<span class="caret"></span></a>
+                        <ul class="login-dp dropdown-menu float-left">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form loginForm" method="POST">
+                                            <div class="form-group">
+                                                <!--<label class="sr-only" for="exampleInputEmail2">Email Address</label>-->
+                                                <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<label class="sr-only" for="exampleInputPassword2">Password</label>-->
+                                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block loginBtn" formaction="/login">Log In</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-12 bottom text-center signUp">
+                                        New here? <a href="/signup"><b>Sign Up</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                <%}
+                else if(data.msg=="feedback")
+                {%>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <form class="form loginForm" method="POST" action="logout">
+                        <div class="form-group">
+                            <button type="submit" class="btn logoutBtn text-uppercase">Log Out</button>
+                        </div>
+                    </form>
+
+               <%}
+               else
+               {%>
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <!--Login Dropdown (includes form)-->
+                    <li class="dropdown nav-item">
+                        <a class="dropdown-toggle nav-link " data-toggle="dropdown" href="">Log in<span class="caret"></span></a>
+                        <ul class="login-dp dropdown-menu float-left">
+                            <li>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form class="form loginForm" method="POST" action="login">
+                                            <div class="form-group">
+                                                <!--<label class="sr-only" for="exampleInputEmail2">Email Address</label>-->
+                                                <input type="email" class="form-control" name="email" placeholder="Email Address" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <!--<label class="sr-only" for="exampleInputPassword2">Password</label>-->
+                                                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-primary btn-block loginBtn" formaction="/login">Log In</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-12 bottom text-center signUp">
+                                        New here? <a href="/signup"><b>Sign Up</b></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                <%}
+            %>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,143 @@
+<% include partials/header.ejs %>
+
+<section class="section skipNavbar"></section>
+<main class="container mar-top40 mar-bot40">
+    <div class="col-lg-12 mar-bot30">
+        <h1 class="text-center text-uppercase">User Registration</h1>
+        <hr>
+    </div>
+
+    <script language="javascript">
+        function passwordChanged() {
+            const strength = document.getElementById('strength');
+            const strongRegex = new RegExp("^(?=.{8,})(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*\\W).*$", "g");
+            const mediumRegex = new RegExp("^(?=.{7,})(((?=.*[A-Z])(?=.*[a-z]))|((?=.*[A-Z])(?=.*[0-9]))|((?=.*[a-z])(?=.*[0-9]))).*$", "g");
+            const enoughRegex = new RegExp("(?=.{6,}).*", "g");
+            const pwd = document.getElementById("pass");
+            if (pwd.value.length==0) {
+                strength.innerHTML = 'Type Password';
+            } else if (false == enoughRegex.test(pwd.value)) {
+                strength.innerHTML = 'More Characters';
+            } else if (strongRegex.test(pwd.value)) {
+                strength.innerHTML = '<span style="color:green">Strong!</span>';
+            } else if (mediumRegex.test(pwd.value)) {
+                strength.innerHTML = '<span style="color:orange">Medium!</span>';
+            } else {
+                strength.innerHTML = '<span style="color:red">Weak!</span>';
+            }
+        }
+        function passMatch()
+        {
+            const pass= document.getElementById("pass").value;
+            const confirmPass= document.getElementById("confirmPass").value;
+            const match= document.getElementById("match");
+
+            if(confirmPass===pass)
+            {
+                match.innerHTML= '';
+            }
+            else
+            {
+                match.innerHTML= '<span style="color:red">Passwords do not match</span>';
+            }
+        }
+    </script>
+
+    <%
+    if (data.msg!=null)
+    {%>
+    <div class="alert alert-info col-lg-8 offset-2" role="alert">
+        <%=data.msg%>
+    </div>
+    <%}
+    else
+    {%>
+    <div></div>
+    <%}
+    %>
+
+
+    <form method="POST" class="form signUpForm" action="signup">
+        <!--Row-->
+        <div class="row">
+            <div class="form-group col-lg-4 offset-2">
+                <label class="cols-sm-2 control-label">First Name</label>
+                <div class="input-group ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="text" class="form-control formInput" name="firstname" required autofocus placeholder="Enter your first name"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="cols-sm-2 control-label">Last Name</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="text" class="form-control formInput" name="lastname" required placeholder="Enter your last name"/>
+                </div>
+            </div>
+        </div>
+
+        <!--Row-->
+        <div class="row">
+            <div class="form-group col-lg-4 offset-2">
+                <label class="cols-sm-2 control-label">Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="email" class="form-control formInput" name="email" required placeholder="Enter your email"/>
+                </div>
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="cols-sm-2 control-label">Role</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                    </div>
+                    <select class="form-control formInput" name="role" style="height: 50px">
+                        <option>Customer</option>
+                        <option>Customer Service Rep</option>
+                        <option>Admin</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--Row-->
+        <div class="row">
+            <div class="form-group col-lg-4 offset-2">
+                <label class="cols-sm-2 control-label">Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="password" class="form-control formInput" id="pass" name="password" required placeholder="Enter your password"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeyup="return passwordChanged(), passMatch();"/>
+
+                </div>
+                <span id="strength"></span>
+            </div>
+            <div class="form-group col-lg-4">
+                <label class="cols-sm-2 control-label">Confirm Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fa fa-lock fa" aria-hidden="true"></i></span>
+                    </div>
+                    <input type="password" class="form-control formInput" id="confirmPass" name="confirmPass" required placeholder="Confirm password"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" onkeyup="return passMatch();"/>
+                </div>
+                <span id="match"></span>
+            </div>
+        </div>
+
+        <div class="col-lg-12 form-group">
+            <input type="submit" class="btn btn-primary btn-lg btn-block mar-top30 text-uppercase col-lg-4 offset-sm-4 signupBtn"/>
+        </div>
+
+    </form>
+</main>
+<section class="section"></section>
+<% include partials/footer.ejs %>

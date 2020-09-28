@@ -1,0 +1,4 @@
+{
+    "port":"80",
+    "dburl":"mongodb://john:ccms1234@ds121099.mlab.com:21099/comp313_2018_group4"
+}
